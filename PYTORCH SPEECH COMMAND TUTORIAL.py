@@ -101,6 +101,7 @@ print(word_start, "-->", index, "-->", word_recovered)
 
 
 # tensor padding하는 함수
+# 배치(batch): 모델의 가중치를 한번 업데이트 시킬 때 사용되는 샘플들의 묶음
 def pad_sequence(batch):
     # 0으로 채워 일괄 처리의 모든 텐서를 동일한 길이로 만듦.
     batch = [item.t() for item in batch]
@@ -206,7 +207,9 @@ def count_parameters(model):
 n = count_parameters(model)
 print("Number of parameters: %s" % n)
 
-# self.conv, self.bn, self.pool 이렇게 한세트씩 갯수를 줄일 수록 파라미터의 갯수가 줄어든다. 
+# 코드를 수정하며 알게된 점
+# 채널의 갯수를 줄이면 파라미터의 갯수가 줄어든다. 
+# self.conv, self.bn, self.pool 이렇게 한세트씩 갯수를 줄일 수록 파라미터의 갯수가 줄어든다.
 
 
 
@@ -239,7 +242,10 @@ def train(model, epoch, log_interval):
         # record loss
         losses.append(loss.item())
 
+
 # 2개의 에포크를 테스트 하는 코드
+# 에포크: 딥러닝에서 에포크는 학습의 횟수를 의미
+# 에포크가 증가할수록 학습하는 횟수가 늘어나 시간이 오래걸림
 log_interval = 20
 n_epoch = 2
 
@@ -258,7 +264,10 @@ with tqdm(total=n_epoch) as pbar:
 # plt.plot(losses);
 # plt.title("training loss");
 
-# 네트워크는 2개의 에포크 후에는 테스트 세트에서 65% 이상 정확해야하며, 21개의 에포크 후에는 85% 이상 정확해야합니다. 
+# 네트워크는 2개의 에포크 후에는 테스트 세트에서 65% 이상 정확해야하며, 21개의 에포크 후에는 85% 이상 정확해야한다. 
+# 3개의 에포크 후에는 테스트 세트에서 75%이상 정확해야한다. 
+# 1개의 에포크 후에는 테스트 세트에서 30%이상 정확해야한다. 
+
 
 # 나의 목소리 녹음 후 돌려본 뒤 인식 결과
 def record(seconds=1):
