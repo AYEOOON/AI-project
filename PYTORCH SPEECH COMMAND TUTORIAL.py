@@ -70,12 +70,13 @@ ipd.Audio(waveform_last.numpy(), rate=sample_rate)  # 오디오 파일을 출력
 
 # 3. 데이터 형식 지정
 # 파형의 경우 분류 능력을 너무 많이 잃지 않으면서 더 빠른 처리를 위해 오디오를 다운샘플링합니다. 
-# 이 튜토리얼의 경우 오디오에 단일 채널을 사용하무로 여기서는 필요하지 않습니다. 
+# 이 튜토리얼의 경우 오디오에 단일 채널을 사용하므로 여기서는 필요하지 않습니다. 
 new_sample_rate = 8000
 transform = torchaudio.transforms.Resample(orig_freq=sample_rate, new_freq=new_sample_rate)
 transformed = transform(waveform)
 
 ipd.Audio(transformed.numpy(), rate=new_sample_rate)
+
 
 # 레이블 목록의 인덱스를 사용하여 각 단어를 인코딩합니다. 
 def label_to_index(word):
@@ -88,12 +89,15 @@ def index_to_label(index):
     # label_to_index함수의 반대되는 과정
     return labels[index]
 
-
+# 예시
 word_start = "yes"
 index = label_to_index(word_start)
 word_recovered = index_to_label(index)
 
 print(word_start, "-->", index, "-->", word_recovered)
+
+# OUT
+# yes ---> tensor(33) ---> yes
 
 
 # tensor padding하는 함수
@@ -153,12 +157,13 @@ test_loader = torch.utils.data.DataLoader(
 
 # 4. 네트워크 정의
 # 이 튜토리얼에서는 CNN을 사용하여 오디오 데이터를 처리
+# 특정 아키텍처는 M5 네트워크 아키텍처를 모델로 한다. 
 class M5(nn.Module):
     def __init__(self, n_input=1, n_output=35, stride=16, n_channel=32):
         super().__init__()
-        self.conv1 = nn.Conv1d(n_input, n_channel, kernel_size=80, stride=stride)
-        self.bn1 = nn.BatchNorm1d(n_channel)
-        self.pool1 = nn.MaxPool1d(4)
+        self.conv1 = nn.Conv1d(n_input, n_channel, kernel_size=80, stride=stride)  # nn.Conv1d: pytorch에서 1차원 컨볼루션 레이어를 정의하는 클래스
+        self.bn1 = nn.BatchNorm1d(n_channel)  # nn.BatchNorm1d: PyTorch 라이브러리의 하나의 정규화(normalization) 모듈, 특시 인공신경망에서 배치 정규화를 수행하는데 사용
+        self.pool1 = nn.MaxPool1d(4)  # nn.MaxPool1d: pytorch 라이브러리에서 제공하는 1차원 최대 풀링 연산을 수행하는 클래스,입력 텐서의 크기를 변환하여 출력 텐서를 생성, CNN에서 주로 사용
         self.conv2 = nn.Conv1d(n_channel, n_channel, kernel_size=3)
         self.bn2 = nn.BatchNorm1d(n_channel)
         self.pool2 = nn.MaxPool1d(4)
@@ -168,7 +173,7 @@ class M5(nn.Module):
         self.conv4 = nn.Conv1d(2 * n_channel, 2 * n_channel, kernel_size=3)
         self.bn4 = nn.BatchNorm1d(2 * n_channel)
         self.pool4 = nn.MaxPool1d(4)
-        self.fc1 = nn.Linear(2 * n_channel, n_output)
+        self.fc1 = nn.Linear(2 * n_channel, n_output)  # nn.Linear: 파이토치에서 사용되는 선형 변환(linear transformation)을 수행하는 클래스
 
     def forward(self, x):
         x = self.conv1(x)
@@ -200,6 +205,8 @@ def count_parameters(model):
 
 n = count_parameters(model)
 print("Number of parameters: %s" % n)
+
+# self.conv, self.bn, self.pool 이렇게 한세트씩 갯수를 줄일 수록 파라미터의 갯수가 줄어든다. 
 
 
 
