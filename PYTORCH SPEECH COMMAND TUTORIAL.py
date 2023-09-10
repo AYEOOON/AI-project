@@ -96,4 +96,60 @@ word_recovered = index_to_label(index)
 print(word_start, "-->", index, "-->", word_recovered)
 
 
+# tensor padding하는 함수
+def pad_sequence(batch):
+    # 0으로 채워 일괄 처리의 모든 텐서를 동일한 길이로 만듦.
+    batch = [item.t() for item in batch]
+    batch = torch.nn.utils.rnn.pad_sequence(batch, batch_first=True, padding_value=0.) # 원하는대로 padding을 줄 수 있는 함수
+    return batch.permute(0, 2, 1)
+
+
+def collate_fn(batch):
+
+    # 데이터 튜플의 형식:
+    # waveform, sample_rate, label, speaker_id, utterance_number
+
+    tensors, targets = [], []
+
+    # 각각의 리스트 안에 넣고, 라벨을 인덱스로 인코딩함
+    for waveform, _, label, *_ in batch:
+        tensors += [waveform]
+        targets += [label_to_index(label)]
+
+    # Group the list of tensors into a batched tensor
+    tensors = pad_sequence(tensors)
+    targets = torch.stack(targets)
+
+    return tensors, targets
+
+
+batch_size = 256
+
+if device == "cuda":
+    num_workers = 1
+    pin_memory = True
+else:
+    num_workers = 0
+    pin_memory = False
+
+train_loader = torch.utils.data.DataLoader(  # DataLoader: 데이터셋을 읽어와서 배치 단위로 데이터를 불러옴. 이를 통해 모델 학습을 더 효율적으로 진행
+    train_set,
+    batch_size=batch_size,   # batch_size: DataLoader가 반환할 배치(batch) 크기입니다. 기본값은 1
+    shuffle=True,  # shuffle: 데이터셋을 무작위로 섞을지 여부를 결정하는 파라미터, True로 설정하면 매 에폭마다 데이터셋이 섞임
+    collate_fn=collate_fn, # collate_fn: 배치(batch) 단위로 데이터를 처리하는 함수
+    num_workers=num_workers, # num_workers: 데이터를 불러올 때 사용할 프로세스(worker) 수. 기본값은 0
+    pin_memory=pin_memory, # pin_memory: True로 설정하면, 반환된 배치 데이터는 CUDA 호환 GPU 메모리에 고정됩니다. 기본값은 False
+)
+test_loader = torch.utils.data.DataLoader(
+    test_set,
+    batch_size=batch_size,
+    shuffle=False,
+    drop_last=False,
+    collate_fn=collate_fn,
+    num_workers=num_workers,
+    pin_memory=pin_memory,
+)
+
+
+# 4. 네트워크 정의
 # 
