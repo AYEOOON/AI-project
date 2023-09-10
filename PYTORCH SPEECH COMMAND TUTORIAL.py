@@ -68,7 +68,7 @@ waveform_last, *_ = train_set[-1]
 ipd.Audio(waveform_last.numpy(), rate=sample_rate)  # 오디오 파일을 출력하기 위한 Ipython 내장라이브러리
 
 
-# 데이터 형식 지정
+# 3. 데이터 형식 지정
 # 파형의 경우 분류 능력을 너무 많이 잃지 않으면서 더 빠른 처리를 위해 오디오를 다운샘플링합니다. 
 # 이 튜토리얼의 경우 오디오에 단일 채널을 사용하무로 여기서는 필요하지 않습니다. 
 new_sample_rate = 8000
