@@ -63,3 +63,37 @@ plt.plot(waveform.t().numpy());
 # 데이터세트에서 사용가능한 라벨 목록을 찾아보는 코드
 labels = sorted(list(set(datapoint[2] for datapoint in train_set)))
 
+# 35개의 데이터세트에서 사용가능한 라벨목록 중 마지막 단어를 출력하는 코드
+waveform_last, *_ = train_set[-1]
+ipd.Audio(waveform_last.numpy(), rate=sample_rate)  # 오디오 파일을 출력하기 위한 Ipython 내장라이브러리
+
+
+# 데이터 형식 지정
+# 파형의 경우 분류 능력을 너무 많이 잃지 않으면서 더 빠른 처리를 위해 오디오를 다운샘플링합니다. 
+# 이 튜토리얼의 경우 오디오에 단일 채널을 사용하무로 여기서는 필요하지 않습니다. 
+new_sample_rate = 8000
+transform = torchaudio.transforms.Resample(orig_freq=sample_rate, new_freq=new_sample_rate)
+transformed = transform(waveform)
+
+ipd.Audio(transformed.numpy(), rate=new_sample_rate)
+
+# 레이블 목록의 인덱스를 사용하여 각 단어를 인코딩합니다. 
+def label_to_index(word):
+    # 35개의 오디오 라벨에서 입력된 단어의 인덱스를 반환
+    return torch.tensor(labels.index(word))
+
+
+def index_to_label(index):
+    # 오디오 라벨에서 입력된 인덱스에 해당하는 단어를 반환
+    # label_to_index함수의 반대되는 과정
+    return labels[index]
+
+
+word_start = "yes"
+index = label_to_index(word_start)
+word_recovered = index_to_label(index)
+
+print(word_start, "-->", index, "-->", word_recovered)
+
+
+# 
