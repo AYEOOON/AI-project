@@ -135,7 +135,7 @@ else:
 train_loader = torch.utils.data.DataLoader(  # DataLoader: 데이터셋을 읽어와서 배치 단위로 데이터를 불러옴. 이를 통해 모델 학습을 더 효율적으로 진행
     train_set,
     batch_size=batch_size,   # batch_size: DataLoader가 반환할 배치(batch) 크기입니다. 기본값은 1
-    shuffle=True,  # shuffle: 데이터셋을 무작위로 섞을지 여부를 결정하는 파라미터, True로 설정하면 매 에폭마다 데이터셋이 섞임
+    shuffle=True,  # shuffle: 데이터셋을 무작위로 섞을지 여부를 결정하는 파라미터, True로 설정하면 매 에포크마다 데이터셋이 섞임
     collate_fn=collate_fn, # collate_fn: 배치(batch) 단위로 데이터를 처리하는 함수
     num_workers=num_workers, # num_workers: 데이터를 불러올 때 사용할 프로세스(worker) 수. 기본값은 0
     pin_memory=pin_memory, # pin_memory: True로 설정하면, 반환된 배치 데이터는 CUDA 호환 GPU 메모리에 고정됩니다. 기본값은 False
@@ -153,3 +153,118 @@ test_loader = torch.utils.data.DataLoader(
 
 # 4. 네트워크 정의
 # 
+
+
+
+# 5. 네트워크 훈련 및 테스트
+# 훈련 데이터를 모델에 공급하고, 역방향 전달 및 최적화 단계를 수행하는 훈련함수
+def train(model, epoch, log_interval):
+    model.train()
+    for batch_idx, (data, target) in enumerate(train_loader):
+
+        data = data.to(device)
+        target = target.to(device)
+
+        # apply transform and model on whole batch directly on device
+        data = transform(data)
+        output = model(data)
+
+        # negative log-likelihood for a tensor of size (batch x 1 x n_output)
+        loss = F.nll_loss(output.squeeze(), target)
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        # print training stats
+        if batch_idx % log_interval == 0:
+            print(f"Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)} ({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}")
+
+        # update progress bar
+        pbar.update(pbar_update)
+        # record loss
+        losses.append(loss.item())
+
+# 2개의 에포크를 테스트 하는 코드
+log_interval = 20
+n_epoch = 2
+
+pbar_update = 1 / (len(train_loader) + len(test_loader))
+losses = []
+
+# The transform needs to live on the same device as the model and the data.
+transform = transform.to(device)
+with tqdm(total=n_epoch) as pbar:
+    for epoch in range(1, n_epoch + 1):
+        train(model, epoch, log_interval)
+        test(model, epoch)
+        scheduler.step()
+
+# Let's plot the training loss versus the number of iteration.
+# plt.plot(losses);
+# plt.title("training loss");
+
+# 네트워크는 2개의 에포크 후에는 테스트 세트에서 65% 이상 정확해야하며, 21개의 에포크 후에는 85% 이상 정확해야합니다. 
+
+# 나의 목소리 녹음 후 돌려본 뒤 인식 결과
+def record(seconds=1):
+
+    from google.colab import output as colab_output
+    from base64 import b64decode
+    from io import BytesIO
+    from pydub import AudioSegment
+
+    RECORD = (
+        b"const sleep  = time => new Promise(resolve => setTimeout(resolve, time))\n"
+        b"const b2text = blob => new Promise(resolve => {\n"
+        b"  const reader = new FileReader()\n"
+        b"  reader.onloadend = e => resolve(e.srcElement.result)\n"
+        b"  reader.readAsDataURL(blob)\n"
+        b"})\n"
+        b"var record = time => new Promise(async resolve => {\n"
+        b"  stream = await navigator.mediaDevices.getUserMedia({ audio: true })\n"
+        b"  recorder = new MediaRecorder(stream)\n"
+        b"  chunks = []\n"
+        b"  recorder.ondataavailable = e => chunks.push(e.data)\n"
+        b"  recorder.start()\n"
+        b"  await sleep(time)\n"
+        b"  recorder.onstop = async ()=>{\n"
+        b"    blob = new Blob(chunks)\n"
+        b"    text = await b2text(blob)\n"
+        b"    resolve(text)\n"
+        b"  }\n"
+        b"  recorder.stop()\n"
+        b"})"
+    )
+    RECORD = RECORD.decode("ascii")
+
+    print(f"Recording started for {seconds} seconds.")
+    display(ipd.Javascript(RECORD))
+    s = colab_output.eval_js("record(%d)" % (seconds * 1000))
+    print("Recording ended.")
+    b = b64decode(s.split(",")[1])
+
+    fileformat = "wav"
+    filename = f"_audio.{fileformat}"
+    AudioSegment.from_file(BytesIO(b)).export(filename, format=fileformat)
+    return torchaudio.load(filename)
+
+
+# Detect whether notebook runs in google colab
+if "google.colab" in sys.modules:
+    waveform, sample_rate = record()
+    print(f"Predicted: {predict(waveform)}.")
+    ipd.Audio(waveform.numpy(), rate=sample_rate)
+
+
+# 결과1
+# left라고 했을 때 six가 나옴
+Recording started for 1 seconds.
+Recording ended.
+Predicted: six.
+
+# 결과2
+# six라고 하면 yes가 나옴
+Recording started for 1 seconds.
+Recording ended.
+Predicted: yes.
