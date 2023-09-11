@@ -49,7 +49,7 @@ class SubsetSC(SPEECHCOMMANDS):
             self._walker = [w for w in self._walker if w not in excludes]
 
 
-# SPEECHCOMMANDS 데이터 세트의 데이터 포인트는 파형(오디오 신호), 샘플 속도, 발화(레이블), 화자의 ID, 발화 수로 구성된 튜플입니다.
+# SPEECHCOMMANDS 데이터 세트의 데이터 포인트는 파형(오디오 신호), 샘플 속도, 발화(레이블), 화자의 ID, 발화 수로 구성된 튜플.
 
 print("Shape of waveform: {}".format(waveform.size()))
 print("Sample rate of waveform: {}".format(sample_rate))
