@@ -1,4 +1,4 @@
-https://www.notion.so/R-CNN-Selective-Search-3f39d6a5e5a24cea91bc96229a0e066c?pvs=4
+# https://www.notion.so/R-CNN-Selective-Search-3f39d6a5e5a24cea91bc96229a0e066c?pvs=4
 
 # 1.selective search 설치
 !pip install selectivesearch
