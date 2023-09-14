@@ -121,6 +121,38 @@ for epoch in range(2):  # 데이터셋을 수차례 반복합니다.
 
 print('Finished Training')
 
+# 신경망 학습을 1번 반복으로 횟수를 감소시켰을 때
+# loss : 1.463으로 증가
+# Ground-Truth: cat ship ship plane
+# Predicted : cat car plne plane
+# Accuracy of the network on the 10000 test images: 48 %
+# 2회 반복보다 정확도 감소
+
+# 신경망 학습을 4번 반복으로 횟수를 증가시켰을 때
+# loss : 1.133으로 감소
+# Ground-Truth: cat ship ship plane
+# Predicted : cat car plne plane
+# Accuracy of the network on the 10000 test images: 59 %
+# 2회 반복보다 정확도 증가
+
+# 신경망 학습을 10번 반복으로 횟수를 증가시켰을 때
+# loss : 0.859으로 감소
+# Ground-Truth: cat ship ship plane
+# Predicted : cat ship plne plane
+# Accuracy of the network on the 10000 test images: 62 %
+# 2회 반복보다 정확도 증가
+# Accuracy for class: plane is 76.9 %
+# Accuracy for class: car   is 75.5 %
+# Accuracy for class: bird  is 41.0 %
+# Accuracy for class: cat   is 45.2 %
+# Accuracy for class: deer  is 66.3 %
+# Accuracy for class: dog   is 57.3 %
+# Accuracy for class: frog  is 69.0 %
+# Accuracy for class: horse is 57.3 %
+# Accuracy for class: ship  is 66.7 %
+# Accuracy for class: truck is 72.4 %
+
+
 
 # 5. 시험용 데이터로 신경망 검사하기
 # 주어진 코드에서는 학습용 데이터 셋을 2회 반복하여 신경망 학습, 신경망이 예측한 정답과 진짜 정답을 비교하는 방학으로 확인.
