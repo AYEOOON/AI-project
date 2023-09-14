@@ -62,6 +62,7 @@ import torch.nn.functional as F
 
 class Net(nn.Module):
     def __init__(self):
+        # Conv2d(in_channels, out_channels, kernel_size)
         super(Net, self).__init__()
         self.conv1 = nn.Conv2d(3, 6, 5)
         self.pool = nn.MaxPool2d(2, 2)
@@ -206,3 +207,22 @@ for data in testloader:
 for i in range(10):
     print('Accuracy of %5s : %2d %%' % (
         classes[i], 100 * class_correct[i] / class_total[i]))
+
+
+# GPU에서 학습하기
+# CPU와 비교했을 때 어마어마한 속도 차이가 나지 않는 것은 왜 그럴까요? 그 이유는 바로 신경망이 너무 작기 때문입니다.
+# Exercise: 신경망의 크기를 키웠을 때 얼마나 빨라지는지 확인해보세요. (첫번째 nn.Conv2d 의 2번째 매개변수와 두번째 nn.Conv2d 의 1번째 매개변수는 같아야 합니다.)
+
+# out_channels = 9, in_channels = 9일때
+# 신경망 학습 속도가 빨리지는지는 모르겠음
+# 근데 사진 잘맞춤
+# 2회반복, loss:1.227
+# GroundTruth: cat ship ship plane
+# predicted: cat ship ship plane
+# 정확도 56%
+
+# self.conv1 = nn.Conv2d(3, 12, 5), self.conv2 = nn.Conv2d(12, 16, 5)
+# 2회 반복, loss : 1.266
+# GroundTruth: cat ship ship plane
+# Predicted:  cat   car   car   ship 
+# 정확도: 57%
