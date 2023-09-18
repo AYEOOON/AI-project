@@ -205,7 +205,9 @@ cp references/detection/coco_utils.py ../
 # mean/std nomalization과 image scaling을 따로 필요없다고 한다.
 # Mask R-CNN 모델에 의해서 handled된다고 한다.
 
-from engine import train_one_epoch, evaluate
+from engine import train_one_epoch, evaluate  
+# 여기서 No Module Named ' torch._six '오류가 발생했었는데 버전이 맞지 않아 발생하는문제인줄 알고 한참 헤매다가
+# 오류시 생기는 링크인 /content/coco_eval.py 를 들어가 import torch_six를 지우니 해결되었다. 
 import utils
 import transforms as T
 
@@ -265,8 +267,9 @@ num_epochs = 10
 for epoch in range(num_epochs):
     train_one_epoch(model, optimizer, data_loader, device, epoch, print_freq=10)
     lr_scheduler.step()
-    evaluate(model, data_loader_test, device=device)
+    evaluate(model, data_loader_test, device=device)  # 여기서  module 'torch' has no attribute '_six'오류가 발생하지만
 ​
+# 밑에 코드들은 잘 돌아간다..
 
 # 10.평가
 
