@@ -1,6 +1,8 @@
 ![캡쳐1](https://github.com/AYEOOON/AI-project/assets/101050134/1f0b1a36-bf23-4cf6-9f67-a209232fb2ef)
 # 객체 탐지 관련 내용 정리
-이미지 분류, 객체 탐지 코드 실행 및 분석
+#### 이미지 분류, 객체 탐지 코드 실행 및 분석
+RNN & Selective Search - https://www.notion.so/R-CNN-Selective-Search-3f39d6a5e5a24cea91bc96229a0e066c
+FCN - https://www.notion.so/FCN-Fully-Convolution-Network-7ee240b80e9e47179fef828d4ef3fcbf
 
 # 객체 탐지 (Object detection)
 물체 검출은 이미지 내에서 알고리즘을 훈련시킬 때 사용된 클래스 라벨에 속하는 모든 물체를 검출하고, 그 위치들도 바운딩 박스로 알려줍니다. 
@@ -40,14 +42,16 @@ Torchvision 모델주(미리 학습된 모델들을 모아 놓은 공간)에서 
 https://tutorials.pytorch.kr/intermediate/torchvision_tutorial.html
 
 ## Selective Search
-기존의 exhaustive search의 방식의 비효율성으로 "object가 있을 법한 영역만 찾는 방법"이 제안되었습니다. 
+기존의 exhaustive search의 방식의 비효율성으로 "object가 있을 법한 영역만 찾는 방법"이 제안되었다.
 
-고정된 window 사이즈는 각기 다른 object의 size나 shape을 포착하기 어렵습니다. 
+고정된 window 사이즈는 각기 다른 object의 size나 shape을 포착하기 어렵다. 
 
 만약 object recognition을 실행하기 전에 아래와 같이 이미지를 올바르게 segment하면 segmented result에 대해서 candidate object로 사용할 수 있지 않을까 -> selective search 
+![다운로드 (1)](https://github.com/AYEOOON/AI-project/assets/101050134/c67a8f2e-867f-4f1f-9632-512f6d93b839)
 
 ### Selctive Search의 목표
 object 인식이나 검출을 위한 가능한 후보 영역을 알아낼 수 있는 방법을 제공하는 것을 목표
+![다운로드](https://github.com/AYEOOON/AI-project/assets/101050134/dac291d8-be5f-44a7-baf8-22378b7f1447)
 
 ### Selctive Search의 과정
 1️⃣ 입력 영상에 대해 segmentation을 실시해서 이를 기반으로 후보 영역을 찾기 위한 seed를 설정
