@@ -5,7 +5,7 @@
 
 만약 훈련된 클래스 라벨에 속하는 물체가 이미지 내에 없으면 아무 것도 검출해내지 않는다. 물체 검출은 객체 검출이라고 불리기도 합니다. 
 
-# TORCHVISION 객체 검출 미세조정(FINETUNING) 튜토리얼
+## TORCHVISION 객체 검출 미세조정(FINETUNING) 튜토리얼
 본 튜토리얼에서는 Penn-Fudan Database for Pedestrian Detection and Segmentation 데이터셋으로 미리 학습된 Mask R-CNN 모델을 미세조정을 합니다. 
 
 데이터셋에는 보행자 인스턴스(이미지 내에서 사람의 위치 좌표와 픽셀 단위의 사람 여부를 구분한 정보)를 포함합니다.
@@ -14,4 +14,7 @@
 
 ### 모델 정의하기
 
-이 튜토리얼에서는 Faster R-CNN에 기반한 Mask R-
+이 튜토리얼에서는 Faster R-CNN에 기반한 Mask R-CNN 모델을 사용합니다. 
+
+Faster R-CNN은 이미지에 존재할 수 있는 객체에 대한 바운딩 박스와 클래스 점수를 모두 예측하는 모델입니다. 
+
