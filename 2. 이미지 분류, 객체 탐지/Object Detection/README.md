@@ -38,3 +38,21 @@ Torchvision 모델주(미리 학습된 모델들을 모아 놓은 공간)에서 
 
 ### 더 자세한 내용은
 https://tutorials.pytorch.kr/intermediate/torchvision_tutorial.html
+
+## Selective Search
+기존의 exhaustive search의 방식의 비효율성으로 "object가 있을 법한 영역만 찾는 방법"이 제안되었습니다. 
+
+고정된 window 사이즈는 각기 다른 object의 size나 shape을 포착하기 어렵습니다. 
+
+만약 object recognition을 실행하기 전에 아래와 같이 이미지를 올바르게 segment하면 segmented result에 대해서 candidate object로 사용할 수 있지 않을까 -> selective search 
+
+### Selctive Search의 목표
+object 인식이나 검출을 위한 가능한 후보 영역을 알아낼 수 있는 방법을 제공하는 것을 목표
+
+### Selctive Search의 과정
+1️⃣ 입력 영상에 대해 segmentation을 실시해서 이를 기반으로 후보 영역을 찾기 위한 seed를 설정
+2️⃣ 초기에 엄청나게 많은 후보들이 만들어 진다. 
+3️⃣ 이를 적절하게 통합해 나가면, segmentation은 후보 영역의 개수가 줄어들고, 결과적으로 이를 바탕으로 box의 후보 개수도 줄어든다. 
+
+### Selctive Search의 단점
+region proposal 과정이 실제 object detection CNN과 별도로 이루어지기 때문에, selective search를 사용하면 end-to-end로 학습이 불가능하고, 실시간 적용에도 어려움이 있다. 
