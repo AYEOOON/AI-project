@@ -1,7 +1,7 @@
 # NLP(Natural Language Processing)
 인공지능의 한 분야로서 머신러닝을 사용하여 텍스트와 데이터를 처리하고 해석
 
-### 자연어 처리 및 자연어 처리 Task 조사
+### 🧾 자연어 처리 및 자연어 처리 Task 조사
 https://www.notion.so/686277d06e1a49809078806636c3ed5f
 ##### 자연어 처리에 대한 정의와 원리, 사용분야를 정리
 
@@ -9,7 +9,7 @@ https://www.notion.so/686277d06e1a49809078806636c3ed5f
 
 - 식신로드 서울지역 '만점 식당' 20선 뽑아오기
 
-## 영어/한국어 Word2Vec 실습
+## 🆎 영어/한국어 Word2Vec 실습
 #### gensim 패키지에서 제공하는 이미 구현된 Word2Vec을 사용하여 영어와 한국어 데이터를 학습
 
 ##### 1️. 훈련 데이터 이해하기
@@ -46,7 +46,7 @@ sg = 0은 CBOW, 1은 Skip-gram.
 예를 들어서 감성 분류 작업을 하는데 훈련 데이터의 양이 부족한 상황이라면, 다른 방대한 데이터를 Word2Vec이나 GloVe 등으로 사전에 학습시켜놓은 임베딩 벡터들을 가지고 와서 모델의 입력으로 사용하는 것이 때로는 더 좋은 성능을 얻을 수 있습니다.
 
 
-## 네이버 영화 리뷰 감성 분류하기(Naver Movie Review Sentiment Analysis)
+## 📽 네이버 영화 리뷰 감성 분류하기(Naver Movie Review Sentiment Analysis)
 #### 해당 데이터를 다운로드 받아 감성 분류를 수행하는 모델을 만들어보는 실습
 총 200,000개 리뷰로 구성된 네이버 영화 리뷰 데이터로 영화 리뷰에 대한 텍스트와 해당 리뷰가 긍정인 경우 1, 부정인 경우 0을 표시한 레이블로 구성되어져 있습니다. 
 
@@ -65,7 +65,7 @@ sg = 0은 CBOW, 1은 Skip-gram.
 임의의 리뷰에 대해서 예측하는 함수를 만들어보겠습니다. 기본적으로 현재 학습한 model에 새로운 입력에 대해서 예측값을 얻는 것은 model.predict()를 사용합니다. 그리고 model.fit()을 할 때와 마찬가지로 새로운 입력에 대해서도 동일한 전처리를 수행 후에 model.predict()의 입력으로 사용해야 합니다.
 
 
-## 네이버 쇼핑 리뷰 감성 분류하기(Naver Shopping Review Sentiment Analysis)
+## 👕 네이버 쇼핑 리뷰 감성 분류하기(Naver Shopping Review Sentiment Analysis)
 ##### 1. Colab에 Mecab 설치
 여기서는 형태소 분석기 Mecab을 사용합니다. 
 
