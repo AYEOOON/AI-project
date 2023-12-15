@@ -1,4 +1,6 @@
 # 🍀FINE-TUNING & TRANSFER LEARNING
+![Untitled](https://github.com/AYEOOON/AI-project/assets/101050134/6e955d29-aeb7-4a59-b3c4-2c493d3af7fd)
+
 
 ### FINE-TUNING
 ##### 1. 모델 전체를 학습하는 경우
