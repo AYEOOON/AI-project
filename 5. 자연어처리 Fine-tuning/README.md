@@ -1,4 +1,4 @@
-# 자연어 처리의 성능지표
+# 📃자연어 처리의 성능지표
 ### F1-Score
 - F1-Score의 기초가 되는 Precision 과 Recall
 
@@ -33,7 +33,7 @@
     - ROUGE-S
     - ROUGE-SU
  
-# HuggingFace KoElectra로 NSMC 감성분석 Fine-tuning해보기
+# 😂HuggingFace KoElectra로 NSMC 감성분석 Fine-tuning해보기
 KoElectra-small을 이용해서 NSMC(Naver Sentiment Movie Corpus) 감성분석 모델을 학습해본다. 
 
 학습은 Googel Colab(GPU)에서 Pytorch를 이용했다.
@@ -62,7 +62,7 @@ ElectraForSequenceClassification 에 ```“monologg/koelectra-small-v2-discrimin
 
 1에폭 학습에 1시간 40분가량 소요됐다.
 
-# pytorch-2-0-bert-text-classification
+# 💸pytorch-2-0-bert-text-classification
 2022년 12월 2일 PyTorch 2.0을 발표하였다. 
 
 PyTorch 2.0은 더 나은 성능, 더 빠르고, 더 파이썬적이며, 이전처럼 역동적으로 유지하는 데 중점을 두었다. 
@@ -77,11 +77,13 @@ PyTorch 2.0은 더 나은 성능, 더 빠르고, 더 파이썬적이며, 이전�
 
 또한 PyTorch 2.0을 Trainer에 기본 통합하는 기능을 포함하는 기본 git 브랜치에서 최신 버전의 변환기를 설치한다. 
 
+
 **2. 데이터 세트 로드 및 준비**
 
 예제를 간단하게 유지하기 위해 BANKING77 데이터 세트에서 텍스트 분류 모델을 교육한다.
 
 BANKING77 데이터 세트는 은행/금융 도메인에서 세분화된 의도(클래스) 세트를 제공한다. 
+
 
 **3. Hugging Face Trainer를 사용하여 BERT 모델 미세 조정 및 평가 추론**
 
@@ -90,6 +92,7 @@ BANKING77 데이터 세트는 은행/금융 도메인에서 세분화된 의도(
 첫 번째 단계는 Hugging Face Hub의 AutoModelForSequenceClassification 클래스를 사용하여 모델을 로드하는 것이다.
 
 그러면 분류 헤드가 맨 위에 있는 사전 훈련된 BERT 가중치가 초기화한다.
+
 
 **4. 실행 및 테스트 모델**
 
