@@ -6,7 +6,7 @@
   - 실제 Positive 샘플 중 분류 모델이 Positive로 판정한 비율
 
   - 분류 모델이 실제 Positive 클래스를 얼마나 빠지지 않고 잘 잡아내는지를 나타냄
-  - 
+
 ![Untitled](https://github.com/AYEOOON/AI-project/assets/101050134/e848f643-aa9b-4af8-81de-3de85c588bd8)
 
 **2. Presision(정밀도)**
@@ -40,6 +40,8 @@
     - ROUGE-SU
  
 # 😂HuggingFace KoElectra로 NSMC 감성분석 Fine-tuning해보기
+https://heegyukim.medium.com/huggingface-koelectra%EB%A1%9C-nsmc-%EA%B0%90%EC%84%B1%EB%B6%84%EB%A5%98%EB%AA%A8%EB%8D%B8%ED%95%99%EC%8A%B5%ED%95%98%EA%B8%B0-1a23a0c704af
+
 KoElectra-small을 이용해서 NSMC(Naver Sentiment Movie Corpus) 감성분석 모델을 학습해본다. 
 
 학습은 Googel Colab(GPU)에서 Pytorch를 이용했다.
@@ -69,6 +71,8 @@ ElectraForSequenceClassification 에 ```“monologg/koelectra-small-v2-discrimin
 1에폭 학습에 1시간 40분가량 소요됐다.
 
 # 💸pytorch-2-0-bert-text-classification
+https://github.com/philschmid/deep-learning-pytorch-huggingface/blob/main/training/pytorch-2-0-bert-text-classification.ipynb
+
 2022년 12월 2일 PyTorch 2.0을 발표하였다. 
 
 PyTorch 2.0은 더 나은 성능, 더 빠르고, 더 파이썬적이며, 이전처럼 역동적으로 유지하는 데 중점을 두었다. 
