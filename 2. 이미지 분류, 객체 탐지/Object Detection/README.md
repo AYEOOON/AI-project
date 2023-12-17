@@ -47,6 +47,7 @@ https://tutorials.pytorch.kr/intermediate/torchvision_tutorial.html
 고정된 window 사이즈는 각기 다른 object의 size나 shape을 포착하기 어렵다. 
 
 만약 object recognition을 실행하기 전에 아래와 같이 이미지를 올바르게 segment하면 segmented result에 대해서 candidate object로 사용할 수 있지 않을까 -> selective search 
+
 ![다운로드 (1)](https://github.com/AYEOOON/AI-project/assets/101050134/c67a8f2e-867f-4f1f-9632-512f6d93b839)
 
 ### Selctive Search의 목표
