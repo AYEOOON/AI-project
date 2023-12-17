@@ -6,11 +6,15 @@
   - 실제 Positive 샘플 중 분류 모델이 Positive로 판정한 비율
 
   - 분류 모델이 실제 Positive 클래스를 얼마나 빠지지 않고 잘 잡아내는지를 나타냄
+  - 
+![Untitled](https://github.com/AYEOOON/AI-project/assets/101050134/e848f643-aa9b-4af8-81de-3de85c588bd8)
 
 **2. Presision(정밀도)**
   - 분류 모델이 Positive로 판정한 것 중, 실제로 Positive인 샘플의 비율
 
   - Positive로 검출된 결과가 얼마나 정확한지를 보여줌
+
+![Untitled (1)](https://github.com/AYEOOON/AI-project/assets/101050134/02fe6666-df12-4938-b9e9-b5177d229a76)
 
 **3. F1-Score**
   - 분류 모델의 Precision과 Recall 성능을 동시에 고려하기 위해서 사용하는 지표
@@ -20,6 +24,8 @@
   - Precision과 Recall의 조화평균으로 정의
 
   - 0과 1사이의 값을 가지며 1에 가까울수록 분류 성능이 좋음을 나타냄
+
+![Untitled (2)](https://github.com/AYEOOON/AI-project/assets/101050134/9837bb9d-2258-4dc4-ac17-625c081e0386)
 
 ### ROUGE(Recall-Orient-Understudy for Gisting Evaluation)
 - 표면적 유사도 측정
