@@ -1,11 +1,11 @@
-![캡쳐1](https://github.com/AYEOOON/AI-project/assets/101050134/1f0b1a36-bf23-4cf6-9f67-a209232fb2ef)
+# 🚶‍♂️객체 탐지 (Object detection)
+물체 검출은 이미지 내에서 알고리즘을 훈련시킬 때 사용된 클래스 라벨에 속하는 모든 물체를 검출하고, 그 위치들도 바운딩 박스로 알려줍니다. 
+
 # 객체 탐지 관련 내용 정리
 #### 이미지 분류, 객체 탐지 코드 실행 및 분석
 RNN & Selective Search - https://www.notion.so/R-CNN-Selective-Search-3f39d6a5e5a24cea91bc96229a0e066c
-FCN - https://www.notion.so/FCN-Fully-Convolution-Network-7ee240b80e9e47179fef828d4ef3fcbf
 
-# 객체 탐지 (Object detection)
-물체 검출은 이미지 내에서 알고리즘을 훈련시킬 때 사용된 클래스 라벨에 속하는 모든 물체를 검출하고, 그 위치들도 바운딩 박스로 알려줍니다. 
+FCN - https://www.notion.so/FCN-Fully-Convolution-Network-7ee240b80e9e47179fef828d4ef3fcbf
 
 만약 훈련된 클래스 라벨에 속하는 물체가 이미지 내에 없으면 아무 것도 검출해내지 않는다. 물체 검출은 객체 검출이라고 불리기도 합니다. 
 
@@ -55,7 +55,9 @@ object 인식이나 검출을 위한 가능한 후보 영역을 알아낼 수 �
 
 ### Selctive Search의 과정
 1️⃣ 입력 영상에 대해 segmentation을 실시해서 이를 기반으로 후보 영역을 찾기 위한 seed를 설정
+
 2️⃣ 초기에 엄청나게 많은 후보들이 만들어 진다. 
+
 3️⃣ 이를 적절하게 통합해 나가면, segmentation은 후보 영역의 개수가 줄어들고, 결과적으로 이를 바탕으로 box의 후보 개수도 줄어든다. 
 
 ### Selctive Search의 단점
