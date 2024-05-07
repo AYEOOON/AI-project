@@ -1,4 +1,4 @@
-# SPEECH COMMAND CLASSIFICATION WITH TORCHAUDIO
+# :speaker: SPEECH COMMAND CLASSIFICATION WITH TORCHAUDIO
 이 튜토리얼에서는 torchaudio를 사용하여 데이터 세트를 로드하고 신호를 리샘플링하였습니다. 
 
 그런 다음 주어진 명령을 인식하로고 훈련한 신경망을 정의하였습니다. 
